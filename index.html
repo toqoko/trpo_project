@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Тест по теме</title>
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div class="tabs">
+         <button class="tab-button active" onclick="switchTab(event, 'test')">Тест</button>
+         <button class="tab-button" onclick="switchTab(event, 'examples')">Примеры программ</button>
+      </div>
+      <div id="test" class="tab-content" style="display: block;">
+         <div class="container">
+            <h1>Тест по теме</h1>
+            <div class="question">
+               <p>1. Какой метод HTTP используется для получения данных с сервера?</p>
+               <input type="radio" name="q1" value="a">GET<br>
+               <input type="radio" name="q1" value="b">POST<br>
+               <input type="radio" name="q1" value="c">PUT<br>
+            </div>
+            <div class="question">
+               <p>2. Какая модель представляет собой основу для сетевого взаимодействия в Python?</p>
+               <input type="radio" name="q2" value="a">TCP/IP<br>
+               <input type="radio" name="q2" value="b">OSI<br>
+               <input type="radio" name="q2" value="c">UDP<br>
+            </div>
+            <div class="question">
+               <p>3. Какая из следующих библиотек Python является самой популярной для выполнения HTTP-запросов?</p>
+               <input type="radio" name="q3" value="a">requests<br>
+               <input type="radio" name="q3" value="b">BeautifulSoup<br>
+               <input type="radio" name="q3" value="c">json<br>
+            </div>
+            <div class="question">
+               <p>4. Какой из методов HTTP обычно используется для отправки данных на сервер?</p>
+               <input type="radio" name="q4" value="a">GET<br>
+               <input type="radio" name="q4" value="b">POST<br>
+               <input type="radio" name="q4" value="c">PUT<br>
+            </div>
+            <div class="question">
+               <p>5. Какая часть URL-адреса обычно содержит имя домена?</p>
+               <input type="radio" name="q5" value="a">Протокол<br>
+               <input type="radio" name="q5" value="b">Путь<br>
+               <input type="radio" name="q5" value="c">Доменное имя<br>
+            </div>
+            <div class="question">
+               <p>6. Какая функция в библиотеке requests используется для выполнения HTTP GET-запроса?</p>
+               <input type="radio" name="q6" value="a">retrieve()<br>
+               <input type="radio" name="q6" value="b">post()<br>
+               <input type="radio" name="q6" value="c">get()<br>
+            </div>
+            <div class="question">
+               <p>7. Какая функция в Python используется для создания сокета?</p>
+               <input type="radio" name="q7" value="a">socket.create()<br>
+               <input type="radio" name="q7" value="b">socket.bind()<br>
+               <input type="radio" name="q7" value="c">socket.socket()<br>
+            </div>
+            <div class="question">
+               <p>8. Какой из следующих методов сокета используется для отправки данных?</p>
+               <input type="radio" name="q8" value="a">send()<br>
+               <input type="radio" name="q8" value="b">receive()<br>
+               <input type="radio" name="q8" value="c">write()<br>
+            </div>
+            <div class="question">
+               <p>9. Какая функция в библиотеке urllib используется для выполнения HTTP-запроса?</p>
+               <input type="radio" name="q9" value="a">request()<br>
+               <input type="radio" name="q9" value="b">get()<br>
+               <input type="radio" name="q9" value="c">open()<br>
+            </div>
+            <div class="question">
+               <p>10. Какой протокол обычно используется в сокетах для надежной передачи данных?</p>
+               <input type="radio" name="q10" value="a">UDP<br>
+               <input type="radio" name="q10" value="b">TCP<br>
+               <input type="radio" name="q10" value="c">HTTP<br>
+            </div>
+            <button class="check-btn" onclick="checkAnswers()">Проверить</button>
+         </div>
+         <div id="resultModal" class="modal">
+            <div class="modal-content">
+               <span class="close" onclick="closeModal()">&times;</span>
+               <p>Вы ответили правильно на <span id="score"></span> вопросов из 10.</p>
+               <p>Ваша оценка: <span id="grade"></span>/10</p>
+            </div>
+         </div>
+      </div>
+      <div id="examples" class="tab-content">
+         <div class="container">
+            <h1>Пример программ на Python</h1>
+            <div class="example">
+               <p>Клиентский скрипт подключается к серверу и ожидает ввода сообщений от пользователя. 
+                  Когда сообщение введено, оно отправляется на сервер. При получении сообщений от сервера, они выводятся на экран.
+               </p>
+               <p>Серверный скрипт принимает подключения от клиентов и сохраняет их. Когда клиент отправляет сообщение, сервер передает его всем другим подключенным клиентам.</p>
+               <div class="tab">
+                  <button id="htmlTab_button" class="inner-tab-button" onclick="switchInnerTab('htmlTab')">Клиент</button>
+                  <button id="jsTab_button" class="inner-tab-button" onclick="switchInnerTab('jsTab')">Сервер</button>
+               </div>
+               <div id="htmlTab" class="inner-tab-content">
+                  <pre><code>
+import socket
+
+# Создание сокета
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    
+# Подключение к серверу
+server_address = ('localhost', 12345)
+client_socket.connect(server_address)
+    
+try:
+    # Отправка данных серверу
+    message = input("Введите сообщение: ")
+    print("Отправляем серверу:", message)
+    client_socket.sendall(message.encode())
+    
+    # Получение ответа от сервера
+    data = client_socket.recv(1024)
+    print("Получено от сервера:", data.decode())
+    
+finally:
+    # Закрытие соединения
+    client_socket.close()    
+                </code></pre>
+               </div>
+               <div id="jsTab" class="inner-tab-content">
+                  <pre><code>
+import socket
+
+# Создание сокета
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Привязка сокета к адресу и порту
+server_address = ('localhost', 12345)
+server_socket.bind(server_address)
+
+# Ожидание подключения клиента
+server_socket.listen(1)
+print("Ждем подключения клиента...")
+
+# Принятие подключения
+connection, client_address = server_socket.accept()
+print("Подключен клиент:", client_address)
+
+try:
+    while True:
+        # Получение данных от клиента
+        data = connection.recv(1024)
+        if data:
+            print("Получено от клиента:", data.decode())
+            # Отправка обратно клиенту
+            connection.sendall(data)
+        else:
+            break
+
+finally:
+    # Закрытие соединения
+    connection.close()
+                </code></pre>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="script.js"></script>
+   </body>
+</html>
